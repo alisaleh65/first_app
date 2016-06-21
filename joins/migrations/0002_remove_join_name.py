@@ -11,9 +11,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.RemoveField(
             model_name='join',
             name='name',
-            field=models.CharField(default='no_name', max_length=20),
         ),
     ]
