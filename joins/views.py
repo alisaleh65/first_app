@@ -3,6 +3,21 @@ from .forms import EmailForm, JoinForm
 from .models import Join
 
 
+def get_ip(req):
+    try:
+        x_forward = req.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forward:
+            ip = x_forward.split(",")[0]
+        else:
+            ip = req.META.get('REMOTE_ADDR')
+
+    except:
+
+        ip = ""
+
+    return ip
+
+
 def home(request):
     #
     # form = EmailForm(request.POST or None)
@@ -20,6 +35,7 @@ def home(request):
     if form.is_valid():
         new_join = form.save(commit=False)
         # we might do something.
+        new_join.ip_address = get_ip(request)
         new_join.save()
 
     context = {'form': form}
