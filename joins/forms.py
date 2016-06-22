@@ -12,4 +12,4 @@ class JoinForm(forms.ModelForm):
 
     class Meta:
         model = Join
-        fields = "__all__"
+        fields = ["email"]
