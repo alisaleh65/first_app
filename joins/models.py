@@ -3,7 +3,7 @@ from django.db import models
 
 class Join(models.Model):
 
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     ref_id = models.CharField(max_length=100, default='ABC', unique=True)
     ip_address = models.CharField(max_length=120, default='ABC')
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

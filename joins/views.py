@@ -1,5 +1,7 @@
-from django.shortcuts import render
 import uuid
+
+from django.shortcuts import render, HttpResponseRedirect
+
 from .forms import EmailForm, JoinForm
 from .models import Join
 
@@ -29,6 +31,14 @@ def get_ref_id():
     except:
         return ref_id
 
+
+def share(request, ref_id):
+    print("ref Id is ", ref_id)
+    context = {'ref_id': ref_id}
+    template = "share.html"
+    return render(request, template, context)
+
+
 def home(request):
     #
     # form = EmailForm(request.POST or None)
@@ -52,6 +62,8 @@ def home(request):
             new_join_old.ref_id = get_ref_id()
             new_join_old.ip_address = get_ip(request)
             new_join_old.save()
+
+        return HttpResponseRedirect("/%s" % new_join_old.ref_id)
 
     context = {'form': form}
     template = 'home.html'
