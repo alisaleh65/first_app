@@ -33,13 +33,20 @@ def get_ref_id():
 
 
 def share(request, ref_id):
-    print("ref Id is ", ref_id)
+    # print("ref Id is ", ref_id)
     context = {'ref_id': ref_id}
     template = "share.html"
     return render(request, template, context)
 
 
 def home(request):
+    try:
+        ref_id = request.session['join_id_ref']
+        obj = Join.objects.get(id=ref_id)
+    except:
+        ref_id = None
+        obj = None
+    # print(obj, " is the id.")
     #
     # form = EmailForm(request.POST or None)
     # if form.is_valid():
