@@ -1,6 +1,7 @@
 import uuid
 
 from django.shortcuts import render, HttpResponseRedirect
+from django.conf import settings
 
 from .forms import EmailForm, JoinForm
 from .models import Join
@@ -34,7 +35,11 @@ def get_ref_id():
 
 def share(request, ref_id):
     # print("ref Id is ", ref_id)
-    context = {'ref_id': ref_id}
+    obj = Join.objects.get(ref_id=ref_id)
+    count = obj.referral.all().count()
+    ref_url = settings.REF_URL + str(ref_id)
+    print(ref_url)
+    context = {'ref_id': ref_id, 'referral_url': ref_url, 'friend_count': count}
     template = "share.html"
     return render(request, template, context)
 

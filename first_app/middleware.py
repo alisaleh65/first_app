@@ -11,5 +11,9 @@ class ReferMiddleware:
 
         except:
             obj = None
+            print("not")
 
-        request.session['join_id_ref'] = obj.id
+        if obj:
+            request.session['join_id_ref'] = obj.id
+        else:
+            request.session['join_id_ref'] = 'none'
