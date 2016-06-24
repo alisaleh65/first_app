@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {{% block content %}
-    <a class="btn-success" href="www.google.com">
-        سلام دنیا
-    </a>
+<img src="{% static 'img/a.jpg' %}">
 
 <form method="post" action=""> {% csrf_token %}
     {{ form.as_p }}
